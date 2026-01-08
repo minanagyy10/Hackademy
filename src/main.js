@@ -71,12 +71,10 @@ async function bootstrap() {
     return app;
 }
 
-export default bootstrap;
-
 // Start the server if this file is run directly
-if (import.meta.url === `file://${fileURLToPath(import.meta.url)}`) {
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
     bootstrap();
 }
 
-// For Vercel serverless: need to export the app
-export const app = await bootstrap();
+// For Vercel serverless
+export default await bootstrap();
