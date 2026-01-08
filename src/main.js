@@ -37,9 +37,8 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 3. Establish Database Connection
-// Mongoose handles request buffering, so it's safe to start this here
-database_connection();
+// 3. Establish Database Connection (await at module level for serverless)
+await database_connection();
 
 // 4. Global Middleware
 app.use((req, res, next) => {
