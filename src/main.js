@@ -60,12 +60,23 @@ async function bootstrap() {
     app.use("/api/badges", badgeController);
 
     const PORT = +process.env.PORT || 9999;
-    server.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
+
+    // Only listen if not running as a Vercel serverless function
+    if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+        server.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    }
+
+    return app;
 }
 
 export default bootstrap;
 
-// Start the server
-bootstrap();
+// Start the server if this file is run directly
+if (import.meta.url === `file://${fileURLToPath(import.meta.url)}`) {
+    bootstrap();
+}
+
+// For Vercel serverless: need to export the app
+export const app = await bootstrap();
