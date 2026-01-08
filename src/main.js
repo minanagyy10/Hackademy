@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
-import { database_connection } from './db/connections.js';
+import { database_connection, mongoose } from './db/connections.js';
 
 // Import Controllers
 import authController from './modules/auth/auth.controller.js';
@@ -14,6 +14,23 @@ import badgeController from './modules/badge/badge.controller.js';
 
 // 1. Initial configuration
 config();
+
+// Required Environment Variables Check
+const REQUIRED_ENV_VARS = [
+    'DB_URL',
+    'JWT_SECRET_LOGIN',
+    'JWT_SECRET_REFRESH',
+    'CLOUDINARY_CLOUD_NAME',
+    'CLOUDINARY_API_KEY',
+    'CLOUDINARY_API_SECRET'
+];
+
+const missingVars = REQUIRED_ENV_VARS.filter(v => !process.env[v]);
+if (missingVars.length > 0) {
+    console.error(`[CRITICAL] Missing required environment variables: ${missingVars.join(', ')}`);
+    // On Vercel, we can't crash the process easily but we can flag it
+}
+
 const app = express();
 
 // 2. Setup environment constants
@@ -64,7 +81,11 @@ app.get('/', (req, res) => {
         status: 'success',
         message: 'Hackademy Backend API is fully operational 🚀',
         version: '1.0.0',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        diagnostics: {
+            databaseConnected: mongoose.connection.readyState === 1,
+            missingEnvVars: missingVars.length > 0 ? missingVars : 'none'
+        }
     });
 });
 
