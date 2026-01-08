@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Custom Theme Variables matching Hackademy Design */
+:root {
+  --color-primary: #00D4D4;
+  --color-primary-dark: #00B3B3;
+  --color-bg-dark: #0a0f0f;
+  --color-bg-card: #0d1717;
+  --color-border: #1a3333;
+  --color-text: #ffffff;
+  --color-text-muted: #8aa3a3;
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .gradient-card {
+    background: linear-gradient(135deg, rgba(0, 212, 212, 0.15) 0%, rgba(10, 15, 15, 0.95) 100%);
+  }
+  
+  .gradient-card-hover:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 212, 0.25) 0%, rgba(10, 15, 15, 0.95) 100%);
+  }
+  
+  .gradient-row {
+    background: linear-gradient(90deg, rgba(0, 212, 212, 0.2) 0%, rgba(10, 15, 15, 0.8) 100%);
+  }
+  
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 212, 212, 0.3);
+  }
+}
+
+/* Base Styles */
+body {
+  background-color: #0a0f0f;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a3333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00D4D4;
+}

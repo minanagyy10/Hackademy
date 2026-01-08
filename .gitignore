@@ -1,0 +1,11 @@
+node_modules/
+**/node_modules/
+.env
+dist/
+build/
+uploads/
+**/uploads/
+*.pdf
+*.log
+*.txt
+.DS_Store
