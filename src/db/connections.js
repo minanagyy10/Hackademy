@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-export { mongoose };
+
+let lastError = null;
 
 export const database_connection = async () => {
     try {
@@ -8,10 +9,12 @@ export const database_connection = async () => {
             return;
         }
         await mongoose.connect(process.env.DB_URL, {
-            serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of hanging
+            serverSelectionTimeoutMS: 5000,
         });
+        lastError = null;
         console.log("[DB] MongoDB connected successfully ✅");
     } catch (error) {
+        lastError = error.message;
         console.error("[DB] Connection error details:", {
             name: error.name,
             message: error.message,
@@ -19,3 +22,5 @@ export const database_connection = async () => {
         });
     }
 };
+
+export { mongoose, lastError };

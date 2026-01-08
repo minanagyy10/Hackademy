@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
-import { database_connection, mongoose } from './db/connections.js';
+import { database_connection, mongoose, lastError } from './db/connections.js';
 
 // Import Controllers
 import authController from './modules/auth/auth.controller.js';
@@ -84,6 +84,7 @@ app.get('/', (req, res) => {
         timestamp: new Date().toISOString(),
         diagnostics: {
             databaseConnected: mongoose.connection.readyState === 1,
+            dbError: lastError || 'none',
             missingEnvVars: missingVars.length > 0 ? missingVars : 'none'
         }
     });
