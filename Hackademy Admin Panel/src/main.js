@@ -40,8 +40,15 @@ app.get('/', (req, res) => res.send('Hackademy Admin Panel API is running'));
     - Authentication here is for the Admin only (using the 'Admin' collection).
 */
 
-database_connection().then(() => {
+// Establish DB connection
+database_connection();
+
+// Local Server Listener
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
     app.listen(port, () => {
-        console.log(`Admin Panel app listening on port ${port}`);
+        console.log(`Admin Panel local server listening on port ${port}`);
     });
-});
+}
+
+// Export for Vercel
+export default app;

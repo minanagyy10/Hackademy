@@ -2,6 +2,10 @@
     "version": 2,
     "rewrites": [
         {
+            "source": "/admin-api/(.*)",
+            "destination": "/api/admin.js"
+        },
+        {
             "source": "/(.*)",
             "destination": "/api/index.js"
         }
