@@ -1,16 +1,20 @@
 import axios from 'axios';
 
-// Main Application API (Port 9999) - For Students & Instructors
+// Base URL configuration - Use live Vercel URL in production
+const BASE_URL = 'https://hackademy-ztbw-khaled-ahmeds-projects-24f2398a.vercel.app';
+
+// Main Application API - For Students & Instructors
 export const mainApi = axios.create({
-    baseURL: 'http://localhost:9999',
+    baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-// Admin Panel API (Port 9001) - For Admin Operations
+// Admin Panel API - For Admin Operations
+// Both Main and Admin Panel live on the same domain on Vercel
 export const adminApi = axios.create({
-    baseURL: 'http://localhost:9001',
+    baseURL: `${BASE_URL}/admin-api`,
     headers: {
         'Content-Type': 'application/json',
     },

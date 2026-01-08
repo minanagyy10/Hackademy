@@ -16,7 +16,16 @@ const port = process.env.ADMIN_PORT || 9001;
 
 // CORS configuration for frontend
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    const allowedOrigins = [
+        'http://localhost:5173',
+        'https://hackademy-rose.vercel.app',
+        process.env.FRONTEND_URL,
+    ].filter(Boolean);
+
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     if (req.method === 'OPTIONS') {
