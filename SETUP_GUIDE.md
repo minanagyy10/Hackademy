@@ -1,4 +1,4 @@
-# Hackademy - Project Setup Guide
+ \# Hackademy - Project Setup Guide
 
 A cybersecurity training platform with student reports, instructor feedback, leaderboards, and admin management.
 
@@ -148,8 +148,13 @@ VITE v5.x.x ready in xxx ms
 
 ## 🔐 Default Test Accounts
 
-> Create accounts via Admin Panel at `/admin/register`
-
+> Create accounts via Admin Panel at `http://localhost:9001/admin/signup`
+ 
+ {
+        "username": "superadmin1",
+        "email": "admin1@hackademy.com",
+        "password": "adminpassword123"
+}
 ---
 
 ## 🛠️ Troubleshooting
@@ -230,7 +235,7 @@ npm run dev
 ## ✅ Quick Start Commands
 
 ```bash
-# Install all dependencies
+# Install all dependenciesnode "Hackademy Admin Panel/src/main.js"
 npm install && cd hackademy-frontend && npm install && cd ..
 
 # Run everything (3 terminals needed)
@@ -246,4 +251,4 @@ cd hackademy-frontend && npm run dev
 
 ---
 
-**Happy Hacking! 🛡️**
+
